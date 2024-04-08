@@ -4,76 +4,10 @@ import { onMessageListener } from "./firebase";
 import "./styles.css";
 
 export default function App() {
-  // const [address, setAddress] = useState("0xa679c6154b8d4619Af9F83f0bF9a13A680e01eCf");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [txId, setTxId] = useState("");
   const [result, setResult] = useState();
-
-  // const getBalance = async () => {
-  //   setLoading(true);
-  //   setError(null);
-  //   setBalance(null);
-
-  //   const tatum = await TatumSDK.init({
-  //     network: Network.ETHEREUM,
-  //     apiKey: {
-  //       v4: "t-66133e85e32260001c2acd61-ff6748c4b97344578e224e67"
-  //     }
-  //   });
-
-  //   try {
-  //     const bal = await tatum.address.getBalance({
-  //       addresses: [address],
-  //     });
-
-  //     if (!bal || !bal.data) {
-  //       const err = bal.error && bal.error.message[0];
-  //       setError(err || "Unknown error");
-  //     } else {
-  //       for (const data of bal.data) {
-  //         if (data.type === "native") {
-  //           setBalance(`${data.balance} ${data.asset}`);
-  //           break;
-  //         }
-  //       }
-  //     }
-  //   } catch (e) {
-  //     setError(JSON.stringify(e));
-  //   }
-
-  //   tatum.destroy();
-  //   setLoading(false);
-  // }
-
-  const deployNFT = async () => {
-    try {
-      const resp = await fetch(
-        `https://api.tatum.io/v3/nft/deploy`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': 't-66133e85e32260001c2acd61-ff6748c4b97344578e224e67'
-          },
-          body: JSON.stringify({
-            chain: 'ETH',
-            name: 'Benchmark NFT',
-            symbol: 'BTK',
-            fromPrivateKey: '503105f075adbec67e245f9c99f08ba8889d7bb33810148f4f118f7c34b23a09'
-          })
-        }
-      );
-
-      const data = await resp.json();
-      console.log(data);
-      setTxId(data.txId);
-    } catch (e) {
-      setError(JSON.stringify(e));
-    }
-
-    setLoading(false);
-  }
 
   onMessageListener()
     .then((payload) => {
@@ -91,6 +25,7 @@ export default function App() {
     );
 
   const mintNFT = async () => {
+    setLoading(true);
     try {
       const bodyContent = {
         "jobName": "SChare-NFT-ETH",
@@ -135,10 +70,6 @@ export default function App() {
   return (
     <div className="container">
       <h1>Mint Sepolia NFT</h1>
-      {/* <label>
-        <b>Wallet address</b> (Default: Mark Cuban&apos;s address)
-        <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
-      </label> */}
       <button disabled={loading} onClick={mintNFT} >MINT</button>
       <div className="result">
         {loading && <span id="loader"></span>}
