@@ -1,4 +1,3 @@
-import { Network, TatumSDK } from "@tatumio/tatum";
 import React, { useState } from "react";
 
 import "./styles.css";
