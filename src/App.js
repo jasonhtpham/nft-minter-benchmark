@@ -29,16 +29,12 @@ export default function App() {
     try {
       const bodyContent = {
         "jobName": "SChare-NFT-ETH",
-        "serviceID": "65efa9eb52792c01607abfc3",
+        "serviceID": "6613c2f94d24e801605270b3",
         "firebaseMessagingToken": "f2l-nfA6XC7JIdlhAxskBP:APA91bHltzeqStJkmOXGAzV3chI7XqQqEJvFD2FLxcVKTfCAPGpC-lFhQY1LCEnoNZhkD9I0_HXCMUmATogo026_-_VxY_1nmh1INDxu0czbz3SVDkEMBvovY8WAcMs8Sr_UsId4IviE",
         "datafileURL": {
           "url": "",
           "json": {
-            "assetName": "SChare NFT",
-            "assetUnitName": "SCT",
-            "totalSupply": 1,
-            "decimals": 0,
-            "assetURL": "https://schare-nft.com",
+            "url": "https://schare-nft.com",
             "receiver": "0x519Ff9BEFa4127688900C31922350103aA5495e6"
           }
         }
