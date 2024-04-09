@@ -17,7 +17,7 @@ export default function App() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'x-api-key': 't-66133e85e32260001c2acd61-ff6748c4b97344578e224e67'
+            'x-api-key': process.env.REACT_APP_TATUM_API_KEY
           },
           body: JSON.stringify({
             chain: 'ETH',
