@@ -46,8 +46,8 @@ export default function App() {
         {
           method: 'POST',
           headers: {
-            'X-API-KEY': '0N6QC62FNRQR9QGPK9XG7ZXEZL70ZQ9K',
-            'X-SIGNATURE': '1d79dd04fa4bafc97c07161f6a82810807b1d1eb5b140f19f318d7abbf5929c7',
+            'X-API-KEY': process.env.REACT_APP_SCHARE_API_KEY,
+            'X-SIGNATURE': process.env.REACT_APP_SCHARE_SIGNATURE,
             'Content-Type': 'application/json' // Make sure to set the content type to 'application/json'
           },
           body: JSON.stringify(bodyContent)
@@ -66,7 +66,7 @@ export default function App() {
 
   return (
     <div className="container">
-      <h1>Mint Sepolia NFT</h1>
+      <h1>Sepolia NFT Minter</h1>
       <button disabled={loading} onClick={mintNFT} >MINT</button>
       <div className="result">
         {loading && <span id="loader"></span>}
