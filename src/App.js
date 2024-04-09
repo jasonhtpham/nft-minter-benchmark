@@ -26,8 +26,8 @@ export default function App() {
 
   const mintNFT = async () => {
     setLoading(true);
-    const fbToken = await fetchToken();
     try {
+      const fbToken = await fetchToken();
       const bodyContent = {
         "jobName": "SChare-NFT-ETH",
         "serviceID": "6613c2f94d24e801605270b3",
