@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { onMessageListener } from "./firebase";
+import { onMessageListener, fetchToken } from "./firebase";
 
 import "./styles.css";
 
@@ -26,11 +26,12 @@ export default function App() {
 
   const mintNFT = async () => {
     setLoading(true);
+    const fbToken = await fetchToken();
     try {
       const bodyContent = {
         "jobName": "SChare-NFT-ETH",
         "serviceID": "6613c2f94d24e801605270b3",
-        "firebaseMessagingToken": "f2l-nfA6XC7JIdlhAxskBP:APA91bHltzeqStJkmOXGAzV3chI7XqQqEJvFD2FLxcVKTfCAPGpC-lFhQY1LCEnoNZhkD9I0_HXCMUmATogo026_-_VxY_1nmh1INDxu0czbz3SVDkEMBvovY8WAcMs8Sr_UsId4IviE",
+        "firebaseMessagingToken": fbToken,
         "datafileURL": {
           "url": "",
           "json": {
@@ -69,7 +70,7 @@ export default function App() {
       <button disabled={loading} onClick={mintNFT} >MINT</button>
       <div className="result">
         {loading && <span id="loader"></span>}
-        {txId && <h2 id="txId">{txId.toString()}</h2>}
+        {txId && <h2 id="txId">Job ID on SChare {txId.data.toString()}</h2>}
         {result && <h2 id="result">{JSON.stringify(result, undefined, 2)}</h2>}
         {error && <div id="error">{error}</div>}
       </div>
