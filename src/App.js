@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { differenceInMilliseconds } from "date-fns";
 import "./styles.css";
 
 export default function App() {
@@ -8,6 +8,8 @@ export default function App() {
   const [txId, setTxId] = useState("");
 
   const mintNFT = async () => {
+    let end;
+    let start = new Date();
     setLoading(true);
 
     try {
@@ -28,12 +30,14 @@ export default function App() {
       );
 
       const data = await resp.json();
+      end = new Date();
+
       console.log(data);
       setTxId(data.txId);
     } catch (e) {
       setError(JSON.stringify(e));
     }
-
+    console.log("Duration: ", differenceInMilliseconds(end, start) / 1000)
     setLoading(false);
   }
 
