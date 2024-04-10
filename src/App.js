@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { onMessageListener, fetchToken } from "./firebase";
+import { differenceInMilliseconds } from "date-fns";
 
 import "./styles.css";
 
@@ -8,13 +9,20 @@ export default function App() {
   const [error, setError] = useState("");
   const [txId, setTxId] = useState("");
   const [result, setResult] = useState();
+  const [startTime, setStartTime] = useState();
+  let endTime;
 
   onMessageListener()
     .then((payload) => {
+      endTime = new Date();
       let results = {};
       if (payload.data.status === "SUCCESS") {
         results.returnData = payload.data?.returnData ? JSON.parse(payload.data.returnData) : null;
         results.status = "SUCCESSFUL";
+        results.duration = differenceInMilliseconds(
+          startTime,
+          endTime
+        ) / 1000;
         setResult(results);
         console.log("Results via message", results);
       } else {
@@ -25,6 +33,8 @@ export default function App() {
     );
 
   const mintNFT = async () => {
+    setStartTime(new Date());
+
     setLoading(true);
     try {
       const fbToken = await fetchToken();
@@ -72,6 +82,7 @@ export default function App() {
         {loading && <span id="loader"></span>}
         {txId && <h2 id="txId">Job ID on SChare {txId.data.toString()}</h2>}
         {result && <h2 id="result">{JSON.stringify(result, undefined, 2)}</h2>}
+
         {error && <div id="error">{error}</div>}
       </div>
     </div>
