@@ -20,8 +20,8 @@ export default function App() {
         results.returnData = payload.data?.returnData ? JSON.parse(payload.data.returnData) : null;
         results.status = "SUCCESSFUL";
         results.duration = differenceInMilliseconds(
+          endTime,
           startTime,
-          endTime
         ) / 1000;
         setResult(results);
         console.log("Results via message", results);
